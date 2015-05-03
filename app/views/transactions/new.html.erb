@@ -1,0 +1,25 @@
+<%= form_for @transaction, url: {action: "create", controller: 'transactions'} do |f| %>
+  <div class="field">
+    <%= f.label :cents %>
+    <%= f.number_field :cents, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :date %>
+    <%= datetime_select :transaction, :date %>
+  </div>
+  <div class="field">
+    <%= f.label :period %>
+    <%= f.number_field :period %>
+  </div>
+  <div class="field">
+    <%= f.label :repeat %>
+    <%= f.check_box :repeat %>
+  </div>
+  Category: <%= current_user.categories.map { |c| c.name } %>
+  <%= f.select(:category_id, current_user.categories.map { |c| [c.name, c.id] }) %>
+  <%= f.submit 'Create' %>
+<% end %>
